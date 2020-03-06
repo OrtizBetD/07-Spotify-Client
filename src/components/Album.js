@@ -6,7 +6,7 @@ import "../styles/album.css";
 class Album extends React.Component {
   render() {
     return (
-      <Link to={""} className="album">
+      <Link to={`/albums/${this.props.album.album_id}`} className="album">
         <div
           className="cover"
           style={{ backgroundImage: `url(${this.props.album.cover})` }}

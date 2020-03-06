@@ -32,7 +32,7 @@
 /* Body */
 
 #songs > table > tbody > tr:nth-child(even) {
-  background: #f4f4f4;
+  background-color: #f4f4f4;
 }
 
 #songs > table > tbody > tr > td {

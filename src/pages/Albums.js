@@ -29,7 +29,7 @@ class Albums extends React.Component {
         <Sidebar page="albums" />
         <div id="albums">
           {this.state.albums.map(album => {
-            return <Album album={album} key={album._id} name={album.album} />;
+            return <Album album={album} key={album._id} />;
           })}
         </div>
       </div>
