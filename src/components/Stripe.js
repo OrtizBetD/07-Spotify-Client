@@ -26,13 +26,15 @@ class Stripe extends React.Component {
         //setTimeout(() => this.props.closePaywall(), 2000);
         setTimeout(() => {
           this.props.closePaywall();
-          //this._element.clear();
+          let element = document.querySelector(".StripeElement > div");
+          console.log(element);
+          //  element.clear();
         }, 2000);
       } else {
         this.setState({
           message: {
-            content: "pay sucessfull",
-            type: "sucess"
+            content: "payment failed, please try again",
+            type: "error"
           }
         });
       }
@@ -51,10 +53,20 @@ class Stripe extends React.Component {
     return (
       <>
         <CardElement />
-        {this.state.message ? (
+        {this.state.message.type == "sucess" ? (
           <div
             className={this.getMessageClass()}
             style={{ backgroundColor: "lightgreen" }}
+          >
+            {this.state.message.content}
+          </div>
+        ) : (
+          ""
+        )}
+        {this.state.message.type == "error" ? (
+          <div
+            className={this.getMessageClass()}
+            style={{ backgroundColor: "red" }}
           >
             {this.state.message.content}
           </div>

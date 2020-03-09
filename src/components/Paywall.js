@@ -19,7 +19,7 @@ class Paywall extends React.Component {
           <StripeProvider apiKey={process.env.REACT_APP_STRIPE_PK}>
             <Elements>
               <Stripe
-                onReady={element => (this._element = element)}
+                elementRef={c => (this._element = c)}
                 createToken={this.props.createToken}
                 closePaywall={this.props.closePaywall}
               />
