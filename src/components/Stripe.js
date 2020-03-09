@@ -9,7 +9,35 @@ class Stripe extends React.Component {
       type: ""
     }
   };
-  pay = () => {};
+  pay = () => {
+    this.props.stripe.createToken({}).then(res => {
+      //  console.log(res.token);
+      if (res.token) {
+        axios
+          .post(`${process.env.REACT_APP_API}/pay`, { token: res.token.id })
+          .then(res =>
+            this.setState({
+              message: {
+                content: "pay sucessfull thank you",
+                type: "sucess"
+              }
+            })
+          );
+        //setTimeout(() => this.props.closePaywall(), 2000);
+        setTimeout(() => {
+          this.props.closePaywall();
+          //this._element.clear();
+        }, 2000);
+      } else {
+        this.setState({
+          message: {
+            content: "pay sucessfull",
+            type: "sucess"
+          }
+        });
+      }
+    });
+  };
   getMessageClass = () => {
     if (!this.state.message.type) {
       return "";
@@ -24,7 +52,10 @@ class Stripe extends React.Component {
       <>
         <CardElement />
         {this.state.message ? (
-          <div className={this.getMessageClass()}>
+          <div
+            className={this.getMessageClass()}
+            style={{ backgroundColor: "lightgreen" }}
+          >
             {this.state.message.content}
           </div>
         ) : (
